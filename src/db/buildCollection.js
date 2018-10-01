@@ -19,15 +19,7 @@ const exist = (collection) => (id) =>
 const buildCollection = (initialValue) => {
   let collection = initialValue;
   const handlers = {
-    create: (newItem) => {
-      const recordExist = exist(collection)(newItem.id);
-      console.log(recordExist);
-      if (!recordExist) {
-        collection = [...collection, newItem];
-        return { createdAt: new Date().getTime(), created: newItem };
-      }
-      throw new Error('this record exists already.');
-    },
+    create: (newItem) => (collection = [...collection, newItem]),
     find: (predicateObj) => filter(predicateObj)(collection),
     update: (predicateObj, fragment) => {
       const match = filter(predicateObj)(collection);

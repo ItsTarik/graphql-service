@@ -1,1 +1,1 @@
-==> a nodeJs starter that supports ES using babel.
+==> a graphql service exp with express.

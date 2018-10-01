@@ -1,10 +1,9 @@
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
 import cors from 'cors';
-import { buildSchema } from 'graphql';
 
 import schema from './graphql/schema';
-import collectionBuilder from './db/collectionBuilder';
+import buildCollection from './db/buildCollection';
 
 const users = [
   { id: 1, firstname: 'fname1', lastname: 'lname1' },
@@ -12,19 +11,7 @@ const users = [
   { id: 3, firstname: 'fname3', lastname: 'lname3' },
 ];
 
-const usersCollection = collectionBuilder(users);
-
-// var schema = buildSchema(`
-//   type Query {
-//     hello: String,
-//     hi: Int
-//   }
-// `);
-
-// var root = {
-//   hello: () => 'Hello world!',
-//   hi: () => 25,
-// };
+const usersCollection = buildCollection(users);
 
 const app = express();
 app.use(cors());

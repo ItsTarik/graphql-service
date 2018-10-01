@@ -4,7 +4,8 @@ import { GraphQLList, GraphQLInt, GraphQLNonNull } from 'graphql';
 export const getUsersQuery = {
   type: GraphQLList(UserType),
   description: 'Gets the users list',
-  resolve: (_, args, context) => {
+  resolve: (...params) => {
+    const [, , context] = params;
     console.log('get users');
     return context.db.users.find({});
   },
@@ -15,8 +16,6 @@ export const getUserByIdQuery = {
   description: 'Gets the user data by Id',
   args: { id: { type: GraphQLNonNull(GraphQLInt) } },
   resolve: (_, args, context) => {
-    console.log('_', _);
-    console.log('ddd', context.db.users.find({ id: args.id }));
     const result = context.db.users.find({ id: args.id });
     return result.length === 1 ? result[0] : null;
   },
